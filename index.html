@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>zNiclas_ | Staff Profile</title>
+
+    <meta name="description" content="zNiclas_ - Staff Profile">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(88, 101, 242, 0.18), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(130, 70, 255, 0.12), transparent 30%),
+                #08080d;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hintergrund */
+        .background {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.18;
+        }
+
+        .orb.one {
+            width: 300px;
+            height: 300px;
+            background: #5865f2;
+            top: 5%;
+            left: -100px;
+        }
+
+        .orb.two {
+            width: 350px;
+            height: 350px;
+            background: #7c3aed;
+            right: -120px;
+            bottom: 5%;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 900px;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 15, 22, 0.75);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            backdrop-filter: blur(15px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .logo span {
+            color: #5865f2;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* Hauptbereich */
+        main {
+            width: min(1100px, calc(100% - 40px));
+            margin: auto;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(88,101,242,0.8);
+            box-shadow:
+                0 0 30px rgba(88,101,242,0.35),
+                0 0 80px rgba(88,101,242,0.12);
+        }
+
+        .status {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            right: 5px;
+            bottom: 10px;
+            background: #23a55a;
+            border: 5px solid #08080d;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
+            letter-spacing: -3px;
+        }
+
+        .hero h1 span {
+            color: #5865f2;
+        }
+
+        .hero p {
+            margin-top: 12px;
+            color: #9d9daa;
+            font-size: 17px;
+        }
+
+        .discord-profile {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 12px 18px;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            background: rgba(88,101,242,0.12);
+            border: 1px solid rgba(88,101,242,0.3);
+            transition: 0.25s;
+        }
+
+        .discord-profile:hover {
+            background: rgba(88,101,242,0.25);
+            transform: translateY(-3px);
+        }
+
+        .discord-icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #888895;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            position: relative;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(17,17,25,0.75);
+            border: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(15px);
+            transition: 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(88,101,242,0.08),
+                transparent 50%
+            );
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(88,101,242,0.45);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+        }
+
+        .server-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .server-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            object-fit: cover;
+            background: #202027;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .server-name {
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .server-role {
+            color: #8e8e9a;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .join-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            background: #5865f2;
+            border-radius: 11px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .join-button:hover {
+            background: #4752c4;
+            transform: scale(1.02);
+        }
+
+        /* Current */
+        .current .card {
+            border-color: rgba(88,101,242,0.2);
+        }
+
+        /* Former */
+        .former .card {
+            opacity: 0.8;
+        }
+
+        .former .card:hover {
+            opacity: 1;
+        }
+
+        .former .join-button {
+            background: #30303a;
+        }
+
+        .former .join-button:hover {
+            background: #454550;
+        }
+
+        /* About */
+        .about-box {
+            max-width: 750px;
+            margin: auto;
+            padding: 30px;
+            background: rgba(17,17,25,0.7);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 20px;
+            text-align: center;
+            color: #a6a6b2;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666671;
+            font-size: 13px;
+        }
+
+        footer span {
+            color: #5865f2;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            nav {
+                width: calc(100% - 20px);
+                top: 10px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 12px;
+            }
+
+            .avatar {
+                width: 125px;
+                height: 125px;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+</div>
+
+<nav>
+    <div class="logo">
+        z<span>Niclas_</span>
+    </div>
+
+    <div>
+        <a href="#about">About</a>
+        <a href="#staff">Staff</a>
+        <a href="#former">Former</a>
+    </div>
+</nav>
+
+
+<main>
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="avatar-wrapper">
+
+            <!-- Dein Lawliet Bild -->
+            <img
+                src="lawliet.png"
+                alt="zNiclas_ Avatar"
+                class="avatar"
+            >
+
+            <div class="status"></div>
+
+        </div>
+
+        <h1>z<span>Niclas_</span></h1>
+
+        <p>Staff Member · Minecraft Community</p>
+
+        <a
+            class="discord-profile"
+            href="https://discord.com/users/1489219003862749274"
+            target="_blank"
+        >
+            <span class="discord-icon">◉</span>
+            Discord Profile
+        </a>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>A little bit about me</p>
+        </div>
+
+        <div class="about-box">
+
+            <p>
+                Hey, I'm <strong>zNiclas_</strong>!
+                I am active in the Minecraft community and have experience
+                in different Staff positions.
+            </p>
+
+            <br>
+
+            <p>
+                Below you can find my current and former Staff positions
+                together with the respective Discord servers.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CURRENT STAFF -->
+    <section id="staff" class="current">
+
+        <div class="section-title">
+            <h2>Current Staff Positions</h2>
+            <p>Servers where I am currently Staff</p>
+        </div>
+
+        <div class="cards">
+
+
+            <!-- TURTLED -->
+            <div class="card">
+
+                <div class="server-top">
+
+                    <img
+                        src="turtled.png"
+                        class="server-icon"
+                        alt="Turtled Server Icon"
+                    >
+
+                    <div>
+                        <div class="server-name">
+                            Turtled
+                        </div>
+
+                        <div class="server-role">
+                            Moderator
+                        </div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="https://discord.gg/6xXHBJeAk"
+                    target="_blank"
+                    class="join-button"
+                >
+                    Join Discord
+                </a>
+
+            </div>
+
+
+            <!-- BEDPVP -->
+            <div class="card">
+
+                <div class="server-top">
+
+                    <img
+                        src="bedpvp.png"
+                        class="server-icon"
+                        alt="BedPVP Server Icon"
+                    >
+
+                    <div>
+                        <div class="server-name">
+                            BedPVP
+                        </div>
+
+                        <div class="server-role">
+                            Helper
+                        </div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="https://discord.gg/zvEuMqcR"
+                    target="_blank"
+                    class="join-button"
+                >
+                    Join Discord
+                </a>
+
+            </div>
+
+
+            <!-- SPEEDPVP -->
+            <div class="card">
+
+                <div class="server-top">
+
+                    <img
+                        src="speedpvp.png"
+                        class="server-icon"
+                        alt="SpeedPVP Server Icon"
+                    >
+
+                    <div>
+                        <div class="server-name">
+                            SpeedPVP
+                        </div>
+
+                        <div class="server-role">
+                            Tester
+                        </div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="https://discord.gg/mNethzkBC"
+                    target="_blank"
+                    class="join-button"
+                >
+                    Join Discord
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMER STAFF -->
+    <section id="former" class="former">
+
+        <div class="section-title">
+            <h2>Former Staff Positions</h2>
+            <p>Previous positions</p>
+        </div>
+
+        <div class="cards">
+
+
+            <!-- PVPTIERS -->
+            <div class="card">
+
+                <div class="server-top">
+
+                    <img
+                        src="pvptiers.png"
+                        class="server-icon"
+                        alt="PVPTiers Server Icon"
+                    >
+
+                    <div>
+                        <div class="server-name">
+                            PVPTiers
+                        </div>
+
+                        <div class="server-role">
+                            Mace Moderator
+                        </div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="https://discord.gg/XXvPYezPb"
+                    target="_blank"
+                    class="join-button"
+                >
+                    Join Discord
+                </a>
+
+            </div>
+
+
+            <!-- MCTIERS -->
+            <div class="card">
+
+                <div class="server-top">
+
+                    <img
+                        src="mctiers.png"
+                        class="server-icon"
+                        alt="MCTiers Server Icon"
+                    >
+
+                    <div>
+                        <div class="server-name">
+                            MCTiers
+                        </div>
+
+                        <div class="server-role">
+                            Axe Tester
+                        </div>
+                    </div>
+
+                </div>
+
+                <a
+                    href="https://discord.gg/V6TW6gUh6K"
+                    target="_blank"
+                    class="join-button"
+                >
+                    Join Discord
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    © 2026 <span>zNiclas_</span> · Personal Staff Profile
+</footer>
+
+
+</body>
+</html>
