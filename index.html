@@ -1,43 +1,37 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>zNiclas_ | Staff Profile</title>
+    <title>zNiclas_ | Profile</title>
 
     <meta
         name="description"
-        content="zNiclas_ — Minecraft Staff, PvP & Community Profile"
+        content="zNiclas_ — Minecraft PvP, Staff & Community Profile"
     >
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
         :root {
-            --bg: #07070b;
-            --bg-soft: #0c0c12;
+            --bg: #06070a;
+            --card: rgba(14, 15, 21, .72);
+            --card-hover: rgba(18, 19, 28, .86);
 
-            --card: rgba(15, 15, 23, 0.72);
+            --border: rgba(255,255,255,.075);
+            --border-hover: rgba(88,101,242,.42);
 
-            --border: rgba(255, 255, 255, 0.07);
+            --white: #f5f5f7;
+            --muted: #858691;
+            --muted-2: #5f606b;
 
-            --text: #f5f5f7;
-            --muted: #92929f;
-
-            --accent: #5865f2;
-            --accent-light: #7280ff;
+            --blue: #5865f2;
+            --blue-light: #7280ff;
 
             --green: #23a55a;
-
-            --shadow:
-                0 20px 60px rgba(0, 0, 0, 0.35);
+            --radius: 20px;
         }
-
-
-        /* ========================================
-           RESET
-        ======================================== */
 
         * {
             margin: 0;
@@ -51,50 +45,47 @@
 
         body {
             font-family: 'Inter', sans-serif;
-
-            color: var(--text);
-            background: var(--bg);
-
+            color: var(--white);
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(88,101,242,.13),
+                    transparent 35%
+                ),
+                var(--bg);
             min-height: 100vh;
-
             overflow-x: hidden;
         }
 
         ::selection {
-            background: rgba(88, 101, 242, 0.45);
+            background: rgba(88,101,242,.4);
             color: white;
         }
 
-
-        /* ========================================
+        /* =========================
            BACKGROUND
-        ======================================== */
+        ========================= */
 
         .background {
             position: fixed;
             inset: 0;
-
-            pointer-events: none;
-
             overflow: hidden;
-
-            z-index: -1;
+            pointer-events: none;
+            z-index: -5;
         }
 
-        .background::after {
-            content: "";
-
+        .grid {
             position: absolute;
             inset: 0;
 
-            background:
+            background-image:
                 linear-gradient(
-                    rgba(255,255,255,0.015) 1px,
+                    rgba(255,255,255,.018) 1px,
                     transparent 1px
                 ),
                 linear-gradient(
                     90deg,
-                    rgba(255,255,255,0.015) 1px,
+                    rgba(255,255,255,.018) 1px,
                     transparent 1px
                 );
 
@@ -110,194 +101,140 @@
 
         .orb {
             position: absolute;
-
             border-radius: 50%;
-
             filter: blur(120px);
-
-            opacity: 0.15;
-
-            transition:
-                transform 1.5s ease,
-                opacity 1.5s ease;
+            transition: transform 1.2s ease;
         }
 
-        .orb.one {
-            width: 350px;
-            height: 350px;
-
+        .orb-1 {
+            width: 380px;
+            height: 380px;
+            left: -170px;
+            top: -120px;
             background: #5865f2;
-
-            top: -100px;
-            left: -120px;
+            opacity: .14;
         }
 
-        .orb.two {
-            width: 400px;
-            height: 400px;
-
+        .orb-2 {
+            width: 430px;
+            height: 430px;
+            right: -190px;
+            bottom: -150px;
             background: #6d28d9;
-
-            right: -160px;
-            bottom: -100px;
+            opacity: .11;
         }
 
-        .orb.three {
-            width: 250px;
-            height: 250px;
-
-            background: #3346d3;
-
-            left: 45%;
+        .orb-3 {
+            width: 240px;
+            height: 240px;
+            left: 50%;
             top: 45%;
-
-            opacity: 0.07;
+            background: #5865f2;
+            opacity: .045;
         }
 
-
-        /* ========================================
-           NAVIGATION
-        ======================================== */
+        /* =========================
+           NAV
+        ========================= */
 
         nav {
             position: fixed;
-
-            top: 20px;
+            top: 18px;
             left: 50%;
-
             transform: translateX(-50%);
 
-            width: calc(100% - 40px);
-            max-width: 950px;
+            width: calc(100% - 32px);
+            max-width: 960px;
 
-            padding: 14px 20px;
+            padding: 13px 18px;
 
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
 
-            background: rgba(12, 12, 18, 0.72);
+            background: rgba(10,11,16,.7);
 
             border: 1px solid var(--border);
-
-            border-radius: 18px;
+            border-radius: 17px;
 
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
 
             box-shadow:
-                0 10px 40px rgba(0,0,0,0.2);
+                0 15px 50px rgba(0,0,0,.25);
 
             z-index: 1000;
 
-            transition:
-                background 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s ease;
         }
 
-        nav:hover {
-            background: rgba(14, 14, 21, 0.85);
-
-            border-color:
-                rgba(255,255,255,0.1);
+        nav.scrolled {
+            background: rgba(9,10,14,.88);
+            border-color: rgba(255,255,255,.1);
         }
-
-
-        /* ========================================
-           LOGO
-        ======================================== */
 
         .logo {
-            font-size: 17px;
-
+            font-size: 16px;
             font-weight: 800;
-
-            letter-spacing: -0.4px;
-
             cursor: pointer;
-
             user-select: none;
-
-            transition:
-                transform 0.25s ease,
-                text-shadow 0.25s ease;
+            letter-spacing: -.5px;
         }
 
-        .logo:hover {
-            transform: translateY(-1px);
-
-            text-shadow:
-                0 0 20px rgba(88,101,242,0.5);
-        }
-
-        /*
-            Weiß → Blau Verlauf
-        */
-
-        .logo span {
+        .gradient-name {
             background:
                 linear-gradient(
                     110deg,
-                    #ffffff 0%,
-                    #e9ebff 25%,
-                    #b8c0ff 45%,
-                    #7280ff 72%,
+                    #fff 0%,
+                    #f0f1ff 20%,
+                    #ccd1ff 40%,
+                    #8c98ff 65%,
                     #5865f2 100%
                 );
 
-            -webkit-background-clip: text;
-            background-clip: text;
-
-            -webkit-text-fill-color: transparent;
-
             background-size: 200% auto;
 
-            transition:
-                background-position 0.6s ease,
-                filter 0.3s ease;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            transition: .6s ease;
         }
 
-        .logo:hover span {
+        .logo:hover .gradient-name {
             background-position: 100% center;
 
             filter:
                 drop-shadow(
-                    0 0 8px
-                    rgba(88,101,242,0.4)
+                    0 0 9px
+                    rgba(88,101,242,.45)
                 );
         }
 
-
-        /* ========================================
-           NAV LINKS
-        ======================================== */
-
-        nav .links {
+        .nav-links {
             display: flex;
-
-            align-items: center;
-
             gap: 22px;
         }
 
-        nav a {
+        .nav-links a {
             position: relative;
 
-            color: #9a9aa5;
-
+            color: #858691;
             text-decoration: none;
 
-            font-size: 13px;
+            margin: 0;
 
+            font-size: 12px;
             font-weight: 500;
 
-            transition:
-                color 0.25s ease,
-                transform 0.25s ease;
+            transition: .25s ease;
         }
 
-        nav a::after {
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a::after {
             content: "";
 
             position: absolute;
@@ -308,34 +245,21 @@
             width: 0;
             height: 1px;
 
-            background: var(--accent);
+            background: var(--blue);
 
-            transition:
-                width 0.25s ease;
+            transition: .25s ease;
         }
 
-        nav a:hover {
-            color: white;
-
-            transform: translateY(-1px);
-        }
-
-        nav a:hover::after {
+        .nav-links a:hover::after {
             width: 100%;
         }
 
-
-        /* ========================================
+        /* =========================
            MAIN
-        ======================================== */
+        ========================= */
 
         main {
-            width:
-                min(
-                    1080px,
-                    calc(100% - 40px)
-                );
-
+            width: min(1080px, calc(100% - 32px));
             margin: auto;
         }
 
@@ -343,46 +267,35 @@
             padding: 100px 0;
         }
 
-
-        /* ========================================
+        /* =========================
            HERO
-        ======================================== */
+        ========================= */
 
         .hero {
             min-height: 100vh;
 
             display: flex;
-
             flex-direction: column;
 
-            justify-content: center;
-
             align-items: center;
+            justify-content: center;
 
             text-align: center;
 
-            padding-top: 120px;
+            padding-top: 100px;
         }
 
-
-        /* Avatar */
-
-        .avatar-wrapper {
+        .avatar-wrap {
             position: relative;
-
             margin-bottom: 27px;
 
             animation:
-                avatarFloat
-                5s
-                ease-in-out
-                infinite;
+                floatAvatar
+                5s ease-in-out infinite;
         }
 
-        @keyframes avatarFloat {
-
-            0%,
-            100% {
+        @keyframes floatAvatar {
+            0%,100% {
                 transform: translateY(0);
             }
 
@@ -396,51 +309,40 @@
             height: 155px;
 
             object-fit: cover;
-
             border-radius: 50%;
 
             border:
                 4px solid
-                rgba(88,101,242,0.75);
+                rgba(88,101,242,.75);
 
             box-shadow:
-                0 0 30px
-                rgba(88,101,242,0.28),
+                0 0 35px rgba(88,101,242,.3),
+                0 0 100px rgba(88,101,242,.1);
 
-                0 0 80px
-                rgba(88,101,242,0.1);
-
-            transition:
-                transform 0.45s ease,
-                box-shadow 0.45s ease,
-                border-color 0.45s ease;
+            transition: .4s ease;
         }
 
         .avatar:hover {
             transform: scale(1.035);
 
             border-color:
-                rgba(114,128,255,0.95);
+                rgba(114,128,255,.95);
 
             box-shadow:
-                0 0 35px
-                rgba(88,101,242,0.45),
-
-                0 0 100px
-                rgba(88,101,242,0.18);
+                0 0 45px rgba(88,101,242,.45),
+                0 0 120px rgba(88,101,242,.15);
         }
-
-
-        /* Status */
 
         .status {
             position: absolute;
 
+            right: 6px;
+            bottom: 9px;
+
             width: 27px;
             height: 27px;
 
-            right: 5px;
-            bottom: 10px;
+            border-radius: 50%;
 
             background: var(--green);
 
@@ -448,62 +350,43 @@
                 5px solid
                 var(--bg);
 
-            border-radius: 50%;
-
             box-shadow:
-                0 0 15px
-                rgba(35,165,90,0.45);
+                0 0 16px
+                rgba(35,165,90,.5);
         }
-
-
-        /* Hero Name */
 
         .hero h1 {
             font-size:
-                clamp(
-                    44px,
-                    8vw,
-                    76px
-                );
+                clamp(46px, 9vw, 78px);
 
-            font-weight: 800;
+            line-height: .95;
 
             letter-spacing: -4px;
 
-            line-height: 1;
+            font-weight: 800;
 
             cursor: pointer;
 
-            user-select: none;
-        }
-
-        /*
-            KOMPLETTER NAME
-            Weiß → Blau
-        */
-
-        .hero h1 {
             background:
                 linear-gradient(
                     110deg,
-                    #ffffff 0%,
-                    #f3f4ff 20%,
-                    #dce0ff 35%,
-                    #aeb8ff 50%,
-                    #7280ff 72%,
+                    #fff 0%,
+                    #f4f5ff 20%,
+                    #d9ddff 38%,
+                    #9aa5ff 62%,
+                    #7280ff 80%,
                     #5865f2 100%
                 );
 
-            -webkit-background-clip: text;
-            background-clip: text;
-
-            -webkit-text-fill-color: transparent;
-
             background-size: 200% auto;
 
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
             transition:
-                background-position 0.7s ease,
-                filter 0.4s ease;
+                background-position .7s ease,
+                filter .4s ease;
         }
 
         .hero h1:hover {
@@ -511,224 +394,126 @@
 
             filter:
                 drop-shadow(
-                    0 0 14px
-                    rgba(88,101,242,0.3)
+                    0 0 15px
+                    rgba(88,101,242,.3)
                 );
         }
 
-
-        /*
-            Wichtig:
-            span übernimmt jetzt keinen eigenen
-            anderen Farbton mehr.
-        */
-
-        .hero h1 span {
-            color: inherit;
-
-            background: none;
-
-            -webkit-text-fill-color: inherit;
-        }
-
-
-        /* Hero text */
-
-        .hero p {
+        .hero-subtitle {
             margin-top: 16px;
-
             color: var(--muted);
-
-            font-size: 16px;
+            font-size: 15px;
         }
 
-        .hero-sub {
-            display: inline-flex;
-
+        .availability {
+            display: flex;
             align-items: center;
-
             gap: 8px;
 
-            margin-top: 18px;
+            margin-top: 15px;
 
-            color: #777783;
-
-            font-size: 12px;
+            color: #696a75;
+            font-size: 11px;
         }
 
-        .hero-sub .dot {
+        .availability-dot {
             width: 6px;
             height: 6px;
 
             border-radius: 50%;
 
-            background: var(--accent);
+            background: var(--green);
 
             box-shadow:
                 0 0 10px
-                rgba(88,101,242,0.6);
+                rgba(35,165,90,.6);
         }
 
-
-        /* Discord profile */
-
-        .discord-profile {
+        .discord-button {
             display: inline-flex;
-
             align-items: center;
-
             gap: 10px;
 
-            margin-top: 27px;
+            margin-top: 26px;
 
             padding: 12px 18px;
 
             color: white;
-
             text-decoration: none;
 
             border-radius: 12px;
 
             background:
-                rgba(88,101,242,0.1);
+                rgba(88,101,242,.1);
 
             border:
                 1px solid
-                rgba(88,101,242,0.25);
+                rgba(88,101,242,.25);
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s ease;
         }
 
-        .discord-profile:hover {
+        .discord-button:hover {
             transform: translateY(-4px);
 
             background:
-                rgba(88,101,242,0.18);
+                rgba(88,101,242,.18);
 
             border-color:
-                rgba(88,101,242,0.55);
+                rgba(88,101,242,.5);
 
             box-shadow:
-                0 10px 35px
-                rgba(88,101,242,0.15);
+                0 12px 35px
+                rgba(88,101,242,.15);
         }
 
-        .discord-icon {
-            width: 20px;
-            height: 20px;
+        .discord-dot {
+            width: 8px;
+            height: 8px;
 
-            display: grid;
+            border-radius: 50%;
 
-            place-items: center;
+            background: #7289da;
 
-            color: #7289da;
-
-            font-size: 17px;
+            box-shadow:
+                0 0 10px
+                rgba(114,137,218,.6);
         }
 
-
-        /* ========================================
-           SECTION TITLES
-        ======================================== */
+        /* =========================
+           SECTION TITLE
+        ========================= */
 
         .section-title {
             text-align: center;
-
-            margin-bottom: 45px;
+            margin-bottom: 42px;
         }
 
         .section-title h2 {
-            font-size: 34px;
-
-            font-weight: 750;
-
+            font-size: 32px;
             letter-spacing: -1.5px;
         }
 
         .section-title p {
-            margin-top: 9px;
-
-            color: #777783;
-
-            font-size: 14px;
+            margin-top: 8px;
+            color: var(--muted-2);
+            font-size: 13px;
         }
 
-
-        /* ========================================
+        /* =========================
            ABOUT
-        ======================================== */
+        ========================= */
 
-        .about-box {
+        .about {
             max-width: 760px;
-
             margin: auto;
 
-            padding: 32px;
-
-            background: var(--card);
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius: 20px;
-
-            backdrop-filter: blur(15px);
-
-            color: #a6a6b2;
-
-            line-height: 1.8;
+            padding: 30px;
 
             text-align: center;
 
-            box-shadow: var(--shadow);
-
-            transition:
-                transform 0.35s ease,
-                border-color 0.35s ease,
-                box-shadow 0.35s ease;
-        }
-
-        .about-box:hover {
-            transform: translateY(-5px);
-
-            border-color:
-                rgba(88,101,242,0.2);
-
-            box-shadow:
-                0 25px 70px
-                rgba(0,0,0,0.4);
-        }
-
-        .about-box strong {
-            color: white;
-        }
-
-
-        /* ========================================
-           GENERAL CARDS
-        ======================================== */
-
-        .cards {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(280px, 1fr)
-                );
-
-            gap: 20px;
-        }
-
-        .card {
-            position: relative;
-
-            padding: 25px;
+            color: #9a9ba5;
+            line-height: 1.8;
 
             background: var(--card);
 
@@ -736,26 +521,259 @@
                 1px solid
                 var(--border);
 
-            border-radius: 20px;
+            border-radius: var(--radius);
 
             backdrop-filter: blur(15px);
 
-            overflow: hidden;
-
-            box-shadow:
-                0 10px 40px
-                rgba(0,0,0,0.15);
-
-            transition:
-                transform 0.35s
-                    cubic-bezier(.2,.8,.2,1),
-
-                border-color 0.35s ease,
-
-                box-shadow 0.35s ease;
+            transition: .35s ease;
         }
 
-        .card::before {
+        .about:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(88,101,242,.22);
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.35);
+        }
+
+        .about strong {
+            color: white;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 14px;
+
+            margin-top: 20px;
+        }
+
+        .stat {
+            padding: 20px 15px;
+
+            text-align: center;
+
+            background:
+                rgba(14,15,21,.65);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 16px;
+
+            transition: .3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-4px);
+
+            border-color:
+                rgba(88,101,242,.3);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,.2);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+        }
+
+        .stat-label {
+            margin-top: 5px;
+
+            color: var(--muted-2);
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+
+        /* =========================
+           TIERS
+        ========================= */
+
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .tier {
+            position: relative;
+
+            padding: 23px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(18,19,27,.85),
+                    rgba(9,10,14,.75)
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 18px;
+
+            transition: .35s ease;
+        }
+
+        .tier::before {
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            right: -60px;
+            top: -60px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(88,101,242,.13);
+
+            filter: blur(35px);
+
+            transition: .5s ease;
+        }
+
+        .tier:hover {
+            transform: translateY(-6px);
+
+            border-color:
+                rgba(88,101,242,.35);
+
+            box-shadow:
+                0 20px 55px
+                rgba(0,0,0,.3);
+        }
+
+        .tier:hover::before {
+            transform: scale(1.5);
+        }
+
+        .tier-mode {
+            position: relative;
+
+            color: #7b7c87;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            font-weight: 600;
+        }
+
+        .tier-value {
+            position: relative;
+
+            margin-top: 9px;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+        }
+
+        .tier-line {
+            position: relative;
+
+            width: 28px;
+            height: 2px;
+
+            margin-top: 14px;
+
+            border-radius: 10px;
+
+            background: var(--blue);
+        }
+
+        .tier-note {
+            position: relative;
+
+            margin-top: 11px;
+
+            color: #555661;
+
+            font-size: 10px;
+        }
+
+        .tier:first-child .tier-value {
+            color: #c084fc;
+
+            text-shadow:
+                0 0 20px
+                rgba(192,132,252,.2);
+        }
+
+        .tier-legend {
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #555661;
+
+            font-size: 10px;
+        }
+
+        .tier-legend span {
+            color: #777884;
+        }
+
+        /* =========================
+           SERVER CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .server-card {
+            position: relative;
+
+            padding: 23px;
+
+            overflow: hidden;
+
+            background: var(--card);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: var(--radius);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform .35s cubic-bezier(.2,.8,.2,1),
+                border-color .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .server-card::before {
             content: "";
 
             position: absolute;
@@ -765,87 +783,143 @@
             background:
                 radial-gradient(
                     circle at top left,
-                    rgba(88,101,242,0.09),
+                    rgba(88,101,242,.09),
                     transparent 55%
                 );
 
             pointer-events: none;
         }
 
-        .card:hover {
-            transform: translateY(-7px);
+        .server-card::after {
+            content: "";
 
-            border-color:
-                rgba(88,101,242,0.4);
+            position: absolute;
 
-            box-shadow:
-                0 20px 60px
-                rgba(0,0,0,0.35),
+            top: 0;
+            left: -100%;
 
-                0 0 30px
-                rgba(88,101,242,0.05);
+            width: 70%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(114,128,255,.8),
+                    transparent
+                );
+
+            transition: .6s ease;
         }
 
+        .server-card:hover::after {
+            left: 130%;
+        }
 
-        /* Server */
+        .server-card:hover {
+            transform: translateY(-7px);
+
+            background: var(--card-hover);
+
+            border-color: var(--border-hover);
+
+            box-shadow:
+                0 22px 60px
+                rgba(0,0,0,.35);
+        }
 
         .server-top {
-            display: flex;
+            position: relative;
 
+            display: flex;
             align-items: center;
 
-            gap: 15px;
+            gap: 14px;
 
-            margin-bottom: 20px;
+            min-height: 64px;
         }
 
         .server-icon {
             width: 64px;
             height: 64px;
 
+            flex-shrink: 0;
+
             border-radius: 18px;
 
             object-fit: cover;
 
-            background: #202027;
+            background: #1c1d25;
 
             border:
                 1px solid
-                rgba(255,255,255,0.08);
+                rgba(255,255,255,.08);
 
-            transition:
-                transform 0.35s ease;
+            transition: .35s ease;
         }
 
-        .card:hover .server-icon {
+        .server-card:hover .server-icon {
             transform:
-                scale(1.05)
+                scale(1.06)
                 rotate(-2deg);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,.25);
+        }
+
+        .server-info {
+            min-width: 0;
         }
 
         .server-name {
-            font-size: 19px;
-
+            font-size: 17px;
             font-weight: 700;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .server-role {
-            color: #8e8e9a;
+            margin-top: 5px;
 
-            font-size: 14px;
+            color: #80818c;
 
-            margin-top: 4px;
+            font-size: 12px;
         }
 
+        .server-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
 
-        /* Join button */
+            margin-top: 5px;
 
-        .join-button {
+            color: #5f606b;
+
+            font-size: 9px;
+        }
+
+        .server-status-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+        }
+
+        .join {
+            position: relative;
+
             display: block;
 
             width: 100%;
 
-            padding: 12px;
+            margin-top: 19px;
+
+            padding: 11px;
 
             text-align: center;
 
@@ -853,231 +927,69 @@
 
             text-decoration: none;
 
-            background: #5865f2;
-
-            border-radius: 11px;
-
-            font-size: 14px;
-
+            font-size: 12px;
             font-weight: 600;
 
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
+            border-radius: 10px;
+
+            background: var(--blue);
+
+            transition: .25s ease;
         }
 
-        .join-button:hover {
-            background: #6875f5;
+        .join:hover {
+            background: #6b77f5;
 
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
 
             box-shadow:
                 0 8px 25px
-                rgba(88,101,242,0.22);
+                rgba(88,101,242,.22);
         }
 
-
-        /* Former */
-
-        .former .card {
-            opacity: 0.78;
+        .former .server-card {
+            opacity: .72;
         }
 
-        .former .card:hover {
+        .former .server-card:hover {
             opacity: 1;
         }
 
-        .former .join-button {
-            background: #2d2d37;
+        .former .join {
+            background: #292a32;
         }
 
-        .former .join-button:hover {
-            background: #40404c;
-
+        .former .join:hover {
+            background: #3a3b46;
             box-shadow: none;
         }
 
-
-        /* ========================================
-           TIERS
-        ======================================== */
-
-        .tiers-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 16px;
-        }
-
-        .tier-card {
-            position: relative;
-
-            padding: 24px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(18,18,27,0.88),
-                    rgba(11,11,16,0.72)
-                );
-
-            border:
-                1px solid
-                rgba(255,255,255,0.07);
-
-            border-radius: 18px;
-
-            overflow: hidden;
-
-            transition:
-                transform 0.35s
-                    cubic-bezier(.2,.8,.2,1),
-
-                border-color 0.35s ease,
-
-                box-shadow 0.35s ease;
-        }
-
-        .tier-card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 120px;
-            height: 120px;
-
-            right: -50px;
-            top: -50px;
-
-            background:
-                rgba(88,101,242,0.13);
-
-            border-radius: 50%;
-
-            filter: blur(35px);
-
-            transition:
-                transform 0.5s ease;
-        }
-
-        .tier-card:hover {
-            transform:
-                translateY(-7px);
-
-            border-color:
-                rgba(88,101,242,0.38);
-
-            box-shadow:
-                0 20px 50px
-                rgba(0,0,0,0.35),
-
-                0 0 30px
-                rgba(88,101,242,0.05);
-        }
-
-        .tier-card:hover::before {
-            transform: scale(1.5);
-        }
-
-        .tier-mode {
-            position: relative;
-
-            color: #858591;
-
-            font-size: 12px;
-
-            font-weight: 600;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-        }
-
-        .tier-value {
-            position: relative;
-
-            margin-top: 10px;
-
-            font-size: 31px;
-
-            font-weight: 800;
-
-            letter-spacing: -1px;
-
-            color: white;
-        }
-
-        /*
-            LT2 bekommt einen etwas
-            stärkeren Premium-Look
-        */
-
-        .tier-card:first-child .tier-value {
-            color: #c084fc;
-
-            text-shadow:
-                0 0 20px
-                rgba(192,132,252,0.18);
-        }
-
-        .tier-line {
-            position: relative;
-
-            width: 30px;
-            height: 2px;
-
-            margin-top: 16px;
-
-            background: var(--accent);
-
-            border-radius: 5px;
-        }
-
-        .tier-description {
-            position: relative;
-
-            margin-top: 12px;
-
-            color: #686873;
-
-            font-size: 11px;
-        }
-
-        .tier-legend {
+        .loading {
+            color: #666772;
             text-align: center;
 
-            margin-top: 22px;
+            grid-column: 1 / -1;
 
-            color: #62626d;
-
-            font-size: 11px;
+            padding: 30px;
         }
 
-        .tier-legend span {
-            color: #888894;
-        }
-
-
-        /* ========================================
+        /* =========================
            CONTACT
-        ======================================== */
+        ========================= */
 
-        .contact-box {
+        .contact {
             max-width: 850px;
-
             margin: auto;
 
             padding: 35px;
 
+            text-align: center;
+
             background:
                 linear-gradient(
                     145deg,
-                    rgba(17,17,25,0.82),
-                    rgba(10,10,15,0.72)
+                    rgba(17,18,25,.82),
+                    rgba(9,10,14,.75)
                 );
 
             border:
@@ -1086,415 +998,764 @@
 
             border-radius: 22px;
 
-            text-align: center;
-
-            box-shadow: var(--shadow);
-
-            backdrop-filter: blur(15px);
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.25);
         }
 
-        .contact-box h3 {
-            font-size: 25px;
-
-            letter-spacing: -0.7px;
+        .contact h3 {
+            font-size: 24px;
+            letter-spacing: -.7px;
         }
 
-        .contact-box > p {
-            margin-top: 9px;
+        .contact > p {
+            margin-top: 8px;
 
-            color: #777783;
+            color: var(--muted-2);
 
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        .contact-buttons {
+        .contact-links {
             display: grid;
+            grid-template-columns: repeat(2, 1fr);
 
-            grid-template-columns:
-                repeat(2, 1fr);
+            gap: 14px;
 
-            gap: 15px;
-
-            margin-top: 28px;
+            margin-top: 27px;
         }
 
-        .contact-button {
+        .contact-link {
             display: flex;
-
             align-items: center;
-
-            justify-content: center;
 
             gap: 12px;
 
             padding: 15px;
 
             color: white;
-
             text-decoration: none;
 
+            text-align: left;
+
             background:
-                rgba(255,255,255,0.025);
+                rgba(255,255,255,.025);
 
             border:
                 1px solid
-                rgba(255,255,255,0.07);
+                rgba(255,255,255,.07);
 
             border-radius: 13px;
 
-            transition:
-                transform 0.3s ease,
-                background 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+            transition: .3s ease;
         }
 
-        .contact-button:hover {
-            transform:
-                translateY(-4px);
+        .contact-link:hover {
+            transform: translateY(-4px);
 
             background:
-                rgba(88,101,242,0.1);
+                rgba(88,101,242,.09);
 
             border-color:
-                rgba(88,101,242,0.35);
+                rgba(88,101,242,.35);
 
             box-shadow:
                 0 12px 35px
-                rgba(0,0,0,0.25);
+                rgba(88,101,242,.08);
         }
 
         .contact-icon {
-            width: 30px;
-            height: 30px;
+            width: 34px;
+            height: 34px;
 
             display: grid;
-
             place-items: center;
+
+            flex-shrink: 0;
 
             border-radius: 9px;
 
             background:
-                rgba(88,101,242,0.13);
+                rgba(88,101,242,.12);
 
-            color: #7180ff;
+            color: #7280ff;
 
-            font-size: 13px;
-
+            font-size: 10px;
             font-weight: 800;
         }
 
-        .contact-info {
-            text-align: left;
-        }
-
         .contact-label {
-            color: #777783;
+            color: #62636e;
 
-            font-size: 10px;
+            font-size: 9px;
 
             text-transform: uppercase;
-
-            letter-spacing: 0.8px;
+            letter-spacing: .8px;
         }
 
         .contact-name {
-            margin-top: 2px;
+            margin-top: 3px;
 
-            font-size: 14px;
-
+            font-size: 13px;
             font-weight: 600;
         }
 
         .discord-id {
-            margin-top: 24px;
+            margin-top: 22px;
 
-            color: #555560;
-
-            font-size: 10px;
+            color: #4e4f59;
 
             font-family: monospace;
+
+            font-size: 9px;
         }
 
-        .discord-id span {
-            color: #777783;
-        }
-
-
-        /* ========================================
+        /* =========================
            FOOTER
-        ======================================== */
+        ========================= */
 
         footer {
             padding: 60px 20px;
 
             text-align: center;
 
-            color: #555560;
+            color: #4e4f59;
 
-            font-size: 12px;
-        }
-
-        footer span {
-            color: var(--accent-light);
+            font-size: 10px;
         }
 
         .footer-line {
-            width: 40px;
+            width: 38px;
             height: 1px;
 
-            margin:
-                0 auto 20px;
+            margin: 0 auto 18px;
 
             background:
-                rgba(88,101,242,0.5);
+                rgba(88,101,242,.5);
         }
 
+        /* ==================================================
+           EASTER EGG
+        ================================================== */
 
-        /* ========================================
-           VOID MODE
-        ======================================== */
-
-        #void-mode {
+        #easter-egg {
             position: fixed;
 
             inset: 0;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
-            background: #000;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(88,101,242,.08),
+                    transparent 35%
+                ),
+                #020205;
 
             opacity: 0;
-
             visibility: hidden;
 
             pointer-events: none;
 
             z-index: 99999;
 
+            overflow: hidden;
+
             transition:
-                opacity 0.5s ease,
-                visibility 0.5s ease;
+                opacity .5s ease,
+                visibility .5s ease;
         }
 
-        #void-mode.active {
+        #easter-egg.active {
             opacity: 1;
-
             visibility: visible;
-
             pointer-events: all;
         }
 
-        .void-content {
+        .egg-noise {
+            position: absolute;
+
+            inset: -50%;
+
+            opacity: .035;
+
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+
+            animation:
+                noiseMove .18s steps(2) infinite;
+
+            pointer-events: none;
+        }
+
+        @keyframes noiseMove {
+            0% {
+                transform: translate(0,0);
+            }
+
+            25% {
+                transform: translate(2%,-3%);
+            }
+
+            50% {
+                transform: translate(-3%,2%);
+            }
+
+            75% {
+                transform: translate(3%,3%);
+            }
+
+            100% {
+                transform: translate(-2%,-2%);
+            }
+        }
+
+        .egg-scanlines {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    transparent 0px,
+                    transparent 3px,
+                    rgba(255,255,255,.018) 4px
+                );
+
+            opacity: .5;
+
+            pointer-events: none;
+        }
+
+        .egg-content {
             position: relative;
+
+            width:
+                min(
+                    650px,
+                    calc(100% - 40px)
+                );
 
             text-align: center;
 
             animation:
-                voidEnter
-                0.8s
+                eggEnter .8s
                 cubic-bezier(.2,.8,.2,1);
         }
 
-        @keyframes voidEnter {
-
+        @keyframes eggEnter {
             from {
                 opacity: 0;
 
                 transform:
-                    scale(0.92);
+                    scale(.92)
+                    translateY(20px);
 
-                filter: blur(10px);
+                filter: blur(12px);
             }
 
             to {
                 opacity: 1;
 
                 transform:
-                    scale(1);
+                    scale(1)
+                    translateY(0);
 
                 filter: blur(0);
             }
         }
 
-        .void-content::before {
-            content: "";
+        .egg-status {
+            display: inline-flex;
 
-            position: absolute;
+            align-items: center;
 
-            width: 300px;
-            height: 300px;
+            gap: 8px;
 
-            left: 50%;
-            top: 50%;
+            padding: 7px 12px;
 
-            transform:
-                translate(-50%, -50%);
+            color: #656672;
+
+            font-family: monospace;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            border:
+                1px solid
+                rgba(88,101,242,.18);
 
             background:
-                rgba(88,101,242,0.08);
+                rgba(88,101,242,.045);
+
+            border-radius: 999px;
+        }
+
+        .egg-status span {
+            width: 6px;
+            height: 6px;
 
             border-radius: 50%;
 
-            filter: blur(90px);
+            background: #23a55a;
 
-            z-index: -1;
+            box-shadow:
+                0 0 12px
+                rgba(35,165,90,.8);
+
+            animation:
+                statusPulse 1.5s infinite;
         }
 
-        .void-small {
-            color: #555560;
+        @keyframes statusPulse {
+            0%,100% {
+                opacity: .5;
+            }
 
-            font-size: 10px;
+            50% {
+                opacity: 1;
 
-            letter-spacing: 5px;
-
-            text-transform: uppercase;
+                box-shadow:
+                    0 0 18px
+                    rgba(35,165,90,1);
+            }
         }
 
-        .void-title {
-            margin-top: 16px;
+        .egg-terminal {
+            margin-top: 30px;
 
-            font-size:
-                clamp(
-                    34px,
-                    7vw,
-                    64px
-                );
+            text-align: left;
 
-            font-weight: 800;
+            padding: 15px 18px;
 
-            letter-spacing: -3px;
+            border-left:
+                2px solid
+                rgba(88,101,242,.45);
 
-            color: white;
+            background:
+                rgba(255,255,255,.015);
 
-            text-shadow:
-                0 0 30px
-                rgba(88,101,242,0.25);
+            color: #444651;
+
+            font-family: monospace;
+
+            font-size: 9px;
+
+            line-height: 1.9;
+
+            opacity: .85;
         }
 
-        .void-title span {
+        .egg-terminal div {
+            opacity: 0;
+
+            animation:
+                terminalText .6s forwards;
+        }
+
+        .egg-terminal div:nth-child(2) {
+            animation-delay: .45s;
+        }
+
+        .egg-terminal div:nth-child(3) {
+            animation-delay: .9s;
+
             color: #5865f2;
         }
 
-        .void-text {
-            margin-top: 16px;
+        @keyframes terminalText {
+            from {
+                opacity: 0;
+                transform: translateX(-8px);
+            }
 
-            color: #5c5c68;
-
-            font-size: 12px;
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .void-exit {
+        .egg-glitch {
+            position: relative;
+
             margin-top: 35px;
 
-            color: #3d3d48;
+            color: white;
+
+            font-size:
+                clamp(48px, 10vw, 90px);
+
+            font-weight: 800;
+
+            letter-spacing: -5px;
+
+            line-height: .9;
+
+            text-shadow:
+                0 0 30px
+                rgba(88,101,242,.25);
+
+            animation:
+                glitchMain 3s infinite;
+        }
+
+        .egg-glitch::before,
+        .egg-glitch::after {
+            content: attr(data-text);
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            overflow: hidden;
+
+            opacity: .7;
+        }
+
+        .egg-glitch::before {
+            color: #5865f2;
+
+            transform: translate(-2px,0);
+
+            clip-path:
+                inset(20% 0 60% 0);
+
+            animation:
+                glitchBlue
+                2.5s
+                infinite
+                linear
+                alternate-reverse;
+        }
+
+        .egg-glitch::after {
+            color: #ff3b81;
+
+            transform: translate(2px,0);
+
+            clip-path:
+                inset(60% 0 15% 0);
+
+            animation:
+                glitchPink
+                2s
+                infinite
+                linear
+                alternate-reverse;
+        }
+
+        @keyframes glitchMain {
+            0%, 88%, 100% {
+                transform: translate(0);
+            }
+
+            90% {
+                transform: translate(-2px,1px);
+            }
+
+            92% {
+                transform: translate(2px,-1px);
+            }
+        }
+
+        @keyframes glitchBlue {
+            0% {
+                transform: translate(-2px,0);
+            }
+
+            20% {
+                transform: translate(-7px,2px);
+            }
+
+            40% {
+                transform: translate(4px,-2px);
+            }
+
+            60% {
+                transform: translate(-3px,1px);
+            }
+
+            100% {
+                transform: translate(2px,-1px);
+            }
+        }
+
+        @keyframes glitchPink {
+            0% {
+                transform: translate(2px,0);
+            }
+
+            25% {
+                transform: translate(6px,-2px);
+            }
+
+            50% {
+                transform: translate(-4px,2px);
+            }
+
+            75% {
+                transform: translate(3px,-1px);
+            }
+
+            100% {
+                transform: translate(-2px,1px);
+            }
+        }
+
+        .egg-divider {
+            width: 80px;
+            height: 1px;
+
+            margin: 30px auto;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #5865f2,
+                    transparent
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(88,101,242,.6);
+        }
+
+        .egg-title {
+            font-size:
+                clamp(25px, 5vw, 42px);
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            color: #e7e7ec;
+        }
+
+        .egg-title span {
+            color: #5865f2;
+
+            text-shadow:
+                0 0 25px
+                rgba(88,101,242,.4);
+        }
+
+        .egg-subtitle {
+            margin-top: 12px;
+
+            color: #555661;
 
             font-size: 10px;
         }
 
-        .glitch {
+        .egg-system {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 18px;
+
+            margin-top: 27px;
+
+            color: #454650;
+
+            font-family: monospace;
+
+            font-size: 8px;
+
+            letter-spacing: .4px;
+        }
+
+        .egg-system div {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+        .system-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: #23a55a;
+
+            box-shadow:
+                0 0 8px
+                rgba(35,165,90,.6);
+        }
+
+        .system-dot.blue {
+            background: #5865f2;
+
+            box-shadow:
+                0 0 8px
+                rgba(88,101,242,.8);
+        }
+
+        .egg-close {
+            margin-top: 35px;
+
+            padding: 10px 15px;
+
+            color: #656672;
+
+            font-family: Inter, sans-serif;
+
+            font-size: 9px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            transition: .25s ease;
+        }
+
+        .egg-close span {
+            margin-left: 8px;
+
+            padding: 2px 5px;
+
+            color: #454650;
+
+            font-family: monospace;
+
+            background:
+                rgba(255,255,255,.04);
+
+            border-radius: 4px;
+        }
+
+        .egg-close:hover {
+            color: white;
+
+            border-color:
+                rgba(88,101,242,.35);
+
+            background:
+                rgba(88,101,242,.08);
+
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           PARTICLES
+        ========================= */
+
+        .egg-particle {
+            position: absolute;
+
+            width: 2px;
+            height: 2px;
+
+            border-radius: 50%;
+
+            background: #5865f2;
+
+            box-shadow:
+                0 0 8px
+                rgba(88,101,242,.8);
+
             animation:
-                glitch
-                0.35s
-                linear;
+                particleFloat
+                var(--duration)
+                linear infinite;
+
+            opacity: var(--opacity);
         }
 
-        @keyframes glitch {
-
-            0% {
-                transform: translate(0);
-
-                filter: none;
-            }
-
-            20% {
+        @keyframes particleFloat {
+            from {
                 transform:
-                    translate(-4px, 2px);
-
-                filter:
-                    hue-rotate(40deg);
+                    translateY(110vh)
+                    translateX(0);
             }
 
-            40% {
+            to {
                 transform:
-                    translate(4px, -2px);
-
-                filter:
-                    hue-rotate(-40deg);
-            }
-
-            60% {
-                transform:
-                    translate(-2px, 1px);
-
-                filter: none;
-            }
-
-            80% {
-                transform:
-                    translate(2px, -1px);
-            }
-
-            100% {
-                transform: translate(0);
+                    translateY(-10vh)
+                    translateX(var(--drift));
             }
         }
 
-
-        /* ========================================
+        /* =========================
            SCROLLBAR
-        ======================================== */
+        ========================= */
 
         ::-webkit-scrollbar {
             width: 7px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #07070b;
+            background: var(--bg);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #20202b;
-
+            background: #24252e;
             border-radius: 20px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #303041;
+            background: #343641;
         }
 
-
-        /* ========================================
+        /* =========================
            MOBILE
-        ======================================== */
+        ========================= */
 
-        @media (max-width: 750px) {
+        @media (max-width: 800px) {
+
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .tiers {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
 
             nav {
-                width:
-                    calc(100% - 20px);
-
-                top: 10px;
+                top: 9px;
+                width: calc(100% - 18px);
             }
 
-            nav .links {
-                gap: 11px;
+            .nav-links {
+                gap: 10px;
             }
 
-            nav a {
-                font-size: 11px;
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .nav-links a:nth-child(3) {
+                display: none;
             }
 
             main {
-                width:
-                    min(
-                        calc(100% - 24px),
-                        1080px
-                    );
+                width: calc(100% - 22px);
             }
 
             section {
@@ -1502,7 +1763,7 @@
             }
 
             .hero {
-                padding-top: 100px;
+                padding-top: 90px;
             }
 
             .avatar {
@@ -1511,85 +1772,86 @@
             }
 
             .hero h1 {
-                letter-spacing: -2.5px;
+                font-size: 48px;
+                letter-spacing: -3px;
             }
 
-            .tiers-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-            .contact-buttons {
+            .cards,
+            .contact-links {
                 grid-template-columns: 1fr;
+            }
+
+            .tiers {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about,
+            .contact {
+                padding: 24px;
+            }
+
+            .egg-terminal {
+                font-size: 8px;
+            }
+
+            .egg-glitch {
+                font-size: 52px;
+            }
+
+            .egg-system {
+                gap: 10px;
             }
         }
 
+        @media (max-width: 400px) {
 
-        @media (max-width: 480px) {
-
-            nav .links a:nth-child(2) {
+            .nav-links a:first-child {
                 display: none;
             }
 
-            .hero p {
-                font-size: 14px;
-            }
-
-            .cards {
+            .tiers {
                 grid-template-columns: 1fr;
             }
 
-            .tiers-grid {
-                grid-template-columns:
-                    1fr 1fr;
-            }
-
-            .tier-card {
-                padding: 19px;
-            }
-
-            .tier-value {
-                font-size: 27px;
-            }
-
-            .about-box,
-            .contact-box {
-                padding: 24px;
+            .stats {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
 </head>
 
-
 <body>
 
-
-    <!-- ========================================
+    <!-- =========================
          BACKGROUND
-    ======================================== -->
+    ========================= -->
 
     <div class="background">
 
-        <div class="orb one"></div>
+        <div class="grid"></div>
 
-        <div class="orb two"></div>
-
-        <div class="orb three"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
 
     </div>
 
 
-    <!-- ========================================
+    <!-- =========================
          NAVIGATION
-    ======================================== -->
+    ========================= -->
 
-    <nav>
+    <nav id="nav">
 
         <div class="logo" id="logo">
-            <span>zNiclas_</span>
+
+            <span class="gradient-name">
+                zNiclas_
+            </span>
+
         </div>
 
-        <div class="links">
+        <div class="nav-links">
 
             <a href="#about">
                 About
@@ -1614,19 +1876,17 @@
 
     <main>
 
-
-        <!-- ========================================
+        <!-- =========================
              HERO
-        ======================================== -->
+        ========================= -->
 
         <section class="hero">
 
-
-            <div class="avatar-wrapper">
+            <div class="avatar-wrap">
 
                 <img
                     src="lawliet.png"
-                    alt="zNiclas_ Avatar"
+                    alt="zNiclas_"
                     class="avatar"
                 >
 
@@ -1634,52 +1894,43 @@
 
             </div>
 
-
             <h1 id="hero-name">
                 zNiclas_
             </h1>
 
-
-            <p>
-                Staff Member · Minecraft Community
+            <p class="hero-subtitle">
+                Minecraft Staff · PvP · Community
             </p>
 
+            <div class="availability">
 
-            <div class="hero-sub">
+                <span class="availability-dot"></span>
 
-                <span class="dot"></span>
-
-                Currently active in the Minecraft community
+                Currently active
 
             </div>
 
-
             <a
-                class="discord-profile"
                 href="https://discord.com/users/1489219003862749274"
                 target="_blank"
                 rel="noopener noreferrer"
+                class="discord-button"
             >
 
-                <span class="discord-icon">
-                    ◉
-                </span>
+                <span class="discord-dot"></span>
 
                 Discord Profile
 
             </a>
 
-
         </section>
 
 
-
-        <!-- ========================================
+        <!-- =========================
              ABOUT
-        ======================================== -->
+        ========================= -->
 
         <section id="about">
-
 
             <div class="section-title">
 
@@ -1693,45 +1944,57 @@
 
             </div>
 
-
-            <div class="about-box">
+            <div class="about">
 
                 <p>
-
-                    Hey, I'm
-                    <strong>zNiclas_</strong>!
-
-                    I am active in the Minecraft community
-                    and have experience in different
-                    Staff positions.
-
+                    Hey, I'm <strong>zNiclas_</strong>.
+                    I'm active in the Minecraft community
+                    and have experience in different Staff
+                    positions across PvP servers.
                 </p>
-
 
                 <br>
 
-
                 <p>
-
-                    I mainly focus on PvP, moderation,
-                    testing and being part of different
-                    Minecraft communities.
-
+                    My main interests are Minecraft PvP,
+                    testing, moderation and being part of
+                    competitive communities.
                 </p>
 
             </div>
 
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">PvP Modes</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Current Staff</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Former Staff</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Servers</div>
+                </div>
+
+            </div>
 
         </section>
 
 
-
-        <!-- ========================================
+        <!-- =========================
              TIERS
-        ======================================== -->
+        ========================= -->
 
         <section id="tiers">
-
 
             <div class="section-title">
 
@@ -1740,18 +2003,14 @@
                 </h2>
 
                 <p>
-                    Competitive PvP profile
+                    Ranked from highest to lowest
                 </p>
 
             </div>
 
+            <div class="tiers">
 
-            <div class="tiers-grid">
-
-
-                <!-- 1 -->
-
-                <div class="tier-card">
+                <div class="tier">
 
                     <div class="tier-mode">
                         Mace
@@ -1763,16 +2022,13 @@
 
                     <div class="tier-line"></div>
 
-                    <div class="tier-description">
-                        Highest ranked mode
+                    <div class="tier-note">
+                        Highest current tier
                     </div>
 
                 </div>
 
-
-                <!-- 2 -->
-
-                <div class="tier-card">
+                <div class="tier">
 
                     <div class="tier-mode">
                         Sword
@@ -1786,10 +2042,7 @@
 
                 </div>
 
-
-                <!-- 3 -->
-
-                <div class="tier-card">
+                <div class="tier">
 
                     <div class="tier-mode">
                         Crystal
@@ -1803,10 +2056,7 @@
 
                 </div>
 
-
-                <!-- 4 -->
-
-                <div class="tier-card">
+                <div class="tier">
 
                     <div class="tier-mode">
                         Pot
@@ -1820,10 +2070,7 @@
 
                 </div>
 
-
-                <!-- 5 -->
-
-                <div class="tier-card">
+                <div class="tier">
 
                     <div class="tier-mode">
                         Speed
@@ -1837,10 +2084,7 @@
 
                 </div>
 
-
-                <!-- 6 -->
-
-                <div class="tier-card">
+                <div class="tier">
 
                     <div class="tier-mode">
                         Diamond Vanilla
@@ -1854,33 +2098,24 @@
 
                 </div>
 
-
             </div>
-
 
             <div class="tier-legend">
 
-                <span>HT</span>
-                = High Tier
-
-                &nbsp;·&nbsp;
-
-                <span>LT</span>
-                = Low Tier
+                <span>LT</span> = Low Tier
+                &nbsp; · &nbsp;
+                <span>HT</span> = High Tier
 
             </div>
-
 
         </section>
 
 
-
-        <!-- ========================================
+        <!-- =========================
              CURRENT STAFF
-        ======================================== -->
+        ========================= -->
 
-        <section id="staff" class="current">
-
+        <section id="staff">
 
             <div class="section-title">
 
@@ -1889,147 +2124,30 @@
                 </h2>
 
                 <p>
-                    My current Minecraft Staff positions
+                    Current positions
                 </p>
 
             </div>
 
+            <div
+                class="cards"
+                id="current-staff"
+            >
 
-            <div class="cards">
-
-
-                <!-- TURTLED -->
-
-                <div class="card">
-
-                    <div class="server-top">
-
-                        <img
-                            src="turtled.png"
-                            class="server-icon"
-                            alt="Turtled Server Icon"
-                        >
-
-                        <div>
-
-                            <div class="server-name">
-                                Turtled
-                            </div>
-
-                            <div class="server-role">
-                                Moderator
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="https://discord.gg/6xXHBJeAk"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="join-button"
-                    >
-                        Join Discord
-                    </a>
-
+                <div class="loading">
+                    Loading Discord servers...
                 </div>
-
-
-
-                <!-- BEDPVP -->
-
-                <div class="card">
-
-                    <div class="server-top">
-
-                        <img
-                            src="bedpvp.png"
-                            class="server-icon"
-                            alt="BedPVP Server Icon"
-                        >
-
-                        <div>
-
-                            <div class="server-name">
-                                BedPVP
-                            </div>
-
-                            <div class="server-role">
-                                Helper
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="https://discord.gg/zvEuMqcR"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="join-button"
-                    >
-                        Join Discord
-                    </a>
-
-                </div>
-
-
-
-                <!-- SPEEDPVP -->
-
-                <div class="card">
-
-                    <div class="server-top">
-
-                        <img
-                            src="speedpvp.png"
-                            class="server-icon"
-                            alt="SpeedPVP Server Icon"
-                        >
-
-                        <div>
-
-                            <div class="server-name">
-                                SpeedPVP
-                            </div>
-
-                            <div class="server-role">
-                                Tester
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="https://discord.gg/mNethzkBC"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="join-button"
-                    >
-                        Join Discord
-                    </a>
-
-                </div>
-
 
             </div>
-
 
         </section>
 
 
-
-        <!-- ========================================
+        <!-- =========================
              FORMER STAFF
-        ======================================== -->
+        ========================= -->
 
-        <section id="former" class="former">
-
+        <section class="former">
 
             <div class="section-title">
 
@@ -2038,107 +2156,30 @@
                 </h2>
 
                 <p>
-                    Previous Staff positions
+                    Previous positions
                 </p>
 
             </div>
 
+            <div
+                class="cards"
+                id="former-staff"
+            >
 
-            <div class="cards">
-
-
-                <!-- PVPTIERS -->
-
-                <div class="card">
-
-                    <div class="server-top">
-
-                        <img
-                            src="pvptiers.png"
-                            class="server-icon"
-                            alt="PVPTiers Server Icon"
-                        >
-
-                        <div>
-
-                            <div class="server-name">
-                                PVPTiers
-                            </div>
-
-                            <div class="server-role">
-                                Mace Moderator
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="https://discord.gg/XXvPYezPb"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="join-button"
-                    >
-                        Join Discord
-                    </a>
-
+                <div class="loading">
+                    Loading Discord servers...
                 </div>
-
-
-
-                <!-- MCTIERS -->
-
-                <div class="card">
-
-                    <div class="server-top">
-
-                        <img
-                            src="mctiers.png"
-                            class="server-icon"
-                            alt="MCTiers Server Icon"
-                        >
-
-                        <div>
-
-                            <div class="server-name">
-                                MCTiers
-                            </div>
-
-                            <div class="server-role">
-                                Axe Tester
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="https://discord.gg/V6TW6gUh6K"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="join-button"
-                    >
-                        Join Discord
-                    </a>
-
-                </div>
-
 
             </div>
-
 
         </section>
 
 
-
-        <!-- ========================================
+        <!-- =========================
              CONTACT
-        ======================================== -->
+        ========================= -->
 
         <section id="contact">
-
 
             <div class="section-title">
 
@@ -2147,44 +2188,35 @@
                 </h2>
 
                 <p>
-                    Want to get in touch?
+                    Find me online
                 </p>
 
             </div>
 
-
-            <div class="contact-box">
-
+            <div class="contact">
 
                 <h3>
                     Let's connect.
                 </h3>
 
-
                 <p>
-                    You can find me on Discord
-                    or check out my GitHub.
+                    You can find me on Discord or GitHub.
                 </p>
 
-
-                <div class="contact-buttons">
-
-
-                    <!-- DISCORD -->
+                <div class="contact-links">
 
                     <a
-                        class="contact-button"
                         href="https://discord.com/users/1489219003862749274"
                         target="_blank"
                         rel="noopener noreferrer"
+                        class="contact-link"
                     >
 
                         <div class="contact-icon">
                             DC
                         </div>
 
-
-                        <div class="contact-info">
+                        <div>
 
                             <div class="contact-label">
                                 Discord
@@ -2198,23 +2230,18 @@
 
                     </a>
 
-
-
-                    <!-- GITHUB -->
-
                     <a
-                        class="contact-button"
                         href="https://github.com/zNiclas0"
                         target="_blank"
                         rel="noopener noreferrer"
+                        class="contact-link"
                     >
 
                         <div class="contact-icon">
                             GH
                         </div>
 
-
-                        <div class="contact-info">
+                        <div>
 
                             <div class="contact-label">
                                 GitHub
@@ -2228,34 +2255,25 @@
 
                     </a>
 
-
                 </div>
-
 
                 <div class="discord-id">
 
                     Discord ID:
-
-                    <span>
-                        1489219003862749274
-                    </span>
+                    1489219003862749274
 
                 </div>
 
-
             </div>
 
-
         </section>
-
 
     </main>
 
 
-
-    <!-- ========================================
+    <!-- =========================
          FOOTER
-    ======================================== -->
+    ========================= -->
 
     <footer>
 
@@ -2263,104 +2281,610 @@
 
         © 2026
 
-        <span>
+        <span class="gradient-name">
             zNiclas_
         </span>
 
-        · Personal Staff Profile
+        · Personal Profile
 
     </footer>
 
 
+    <!-- =========================
+         EASTER EGG
+    ========================= -->
 
-    <!-- ========================================
-         VOID MODE
-    ======================================== -->
+    <div id="easter-egg">
 
-    <div id="void-mode">
+        <div class="egg-noise"></div>
 
+        <div class="egg-scanlines"></div>
 
-        <div class="void-content">
+        <div
+            class="egg-particles"
+            id="egg-particles"
+        ></div>
 
+        <div class="egg-content">
 
-            <div class="void-small">
-                System Override
+            <div class="egg-status">
+
+                <span></span>
+
+                CONNECTION ESTABLISHED
+
             </div>
 
 
-            <div class="void-title">
+            <div class="egg-terminal">
 
-                z<span>Niclas_</span>
+                <div>
+                    zNiclas_@void:~$ connecting...
+                </div>
 
-                <br>
+                <div>
+                    zNiclas_@void:~$ bypassing security...
+                </div>
 
-                // VOID MODE
+                <div>
+                    zNiclas_@void:~$ access granted.
+                </div>
 
             </div>
 
 
-            <div class="void-text">
-                you weren't supposed to find this.
+            <div
+                class="egg-glitch"
+                data-text="zNiclas_"
+            >
+                zNiclas_
             </div>
 
 
-            <div class="void-exit">
-                Press ESC to exit
+            <div class="egg-divider"></div>
+
+
+            <div class="egg-title">
+
+                VOID<span> MODE</span>
+
             </div>
 
+
+            <div class="egg-subtitle">
+
+                You found something that wasn't
+                supposed to be found.
+
+            </div>
+
+
+            <div class="egg-system">
+
+                <div>
+
+                    <span class="system-dot"></span>
+
+                    SYSTEM ONLINE
+
+                </div>
+
+                <div>
+
+                    <span class="system-dot"></span>
+
+                    IDENTITY VERIFIED
+
+                </div>
+
+                <div>
+
+                    <span class="system-dot blue"></span>
+
+                    ACCESS LEVEL: UNKNOWN
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="egg-close"
+                id="egg-close"
+            >
+
+                RETURN
+
+                <span>
+                    ESC
+                </span>
+
+            </button>
 
         </div>
-
 
     </div>
 
 
-
-    <!-- ========================================
-         JAVASCRIPT
-    ======================================== -->
-
     <script>
 
-        /* ========================================
+        /* =========================================
+           DISCORD SERVERS
+        ========================================= */
+
+        const currentServers = [
+
+            {
+                invite:
+                    "https://discord.gg/6xXHBJeAk",
+
+                role:
+                    "Moderator"
+            },
+
+            {
+                invite:
+                    "https://discord.gg/zvEuMqcR",
+
+                role:
+                    "Helper"
+            },
+
+            {
+                invite:
+                    "https://discord.gg/mNethzkBC",
+
+                role:
+                    "Tester"
+            }
+
+        ];
+
+
+        const formerServers = [
+
+            {
+                invite:
+                    "https://discord.gg/XXvPYezPb",
+
+                role:
+                    "Mace Moderator"
+            },
+
+            {
+                invite:
+                    "https://discord.gg/V6TW6gUh6K",
+
+                role:
+                    "Axe Tester"
+            }
+
+        ];
+
+
+        /* =========================================
+           DISCORD INVITE CODE
+        ========================================= */
+
+        function getInviteCode(invite) {
+
+            return invite
+                .replace(
+                    "https://discord.gg/",
+                    ""
+                )
+                .replace(
+                    "https://discord.com/invite/",
+                    ""
+                )
+                .split("?")[0]
+                .replace("/", "");
+
+        }
+
+
+        const defaultIcon =
+            "https://cdn.discordapp.com/embed/avatars/0.png";
+
+
+        /* =========================================
+           HTML ESCAPE
+        ========================================= */
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =========================================
+           SERVER CARD
+        ========================================= */
+
+        async function createServerCard(server) {
+
+            const code =
+                getInviteCode(server.invite);
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "server-card";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `https://discord.com/api/v10/invites/${encodeURIComponent(code)}?with_counts=true`
+                    );
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Discord API error"
+                    );
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                const guild =
+                    data.guild;
+
+
+                if (!guild) {
+                    throw new Error(
+                        "Guild data missing"
+                    );
+                }
+
+
+                let iconURL =
+                    defaultIcon;
+
+
+                if (guild.icon) {
+
+                    const extension =
+                        guild.icon.startsWith("a_")
+                            ? "gif"
+                            : "png";
+
+
+                    iconURL =
+                        `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${extension}?size=256`;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <div class="server-top">
+
+                        <img
+                            src="${iconURL}"
+                            class="server-icon"
+                            alt="${escapeHTML(guild.name)}"
+                            loading="lazy"
+                        >
+
+                        <div class="server-info">
+
+                            <div class="server-name">
+
+                                ${escapeHTML(guild.name)}
+
+                            </div>
+
+                            <div class="server-role">
+
+                                ${escapeHTML(server.role)}
+
+                            </div>
+
+                            <div class="server-status">
+
+                                <span
+                                    class="server-status-dot"
+                                ></span>
+
+                                Discord Server
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="${server.invite}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="join"
+                    >
+
+                        Join Discord
+
+                    </a>
+
+                `;
+
+            } catch (error) {
+
+                console.error(
+                    "Discord server error:",
+                    error
+                );
+
+
+                card.innerHTML = `
+
+                    <div class="server-top">
+
+                        <img
+                            src="${defaultIcon}"
+                            class="server-icon"
+                            alt="Discord Server"
+                        >
+
+                        <div class="server-info">
+
+                            <div class="server-name">
+                                Discord Server
+                            </div>
+
+                            <div class="server-role">
+
+                                ${escapeHTML(server.role)}
+
+                            </div>
+
+                            <div class="server-status">
+
+                                <span
+                                    class="server-status-dot"
+                                ></span>
+
+                                Discord
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="${server.invite}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="join"
+                    >
+
+                        Join Discord
+
+                    </a>
+
+                `;
+
+            }
+
+
+            return card;
+
+        }
+
+
+        /* =========================================
+           LOAD SERVERS
+        ========================================= */
+
+        async function loadServers() {
+
+            const current =
+                document.getElementById(
+                    "current-staff"
+                );
+
+            const former =
+                document.getElementById(
+                    "former-staff"
+                );
+
+
+            current.innerHTML = "";
+            former.innerHTML = "";
+
+
+            for (
+                const server
+                of currentServers
+            ) {
+
+                const card =
+                    await createServerCard(
+                        server
+                    );
+
+                current.appendChild(
+                    card
+                );
+
+            }
+
+
+            for (
+                const server
+                of formerServers
+            ) {
+
+                const card =
+                    await createServerCard(
+                        server
+                    );
+
+                former.appendChild(
+                    card
+                );
+
+            }
+
+        }
+
+
+        loadServers();
+
+
+        /* =========================================
+           NAV ON SCROLL
+        ========================================= */
+
+        const nav =
+            document.getElementById("nav");
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (
+                    window.scrollY > 30
+                ) {
+
+                    nav.classList.add(
+                        "scrolled"
+                    );
+
+                } else {
+
+                    nav.classList.remove(
+                        "scrolled"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           BACKGROUND PARALLAX
+        ========================================= */
+
+        const orb1 =
+            document.querySelector(".orb-1");
+
+        const orb2 =
+            document.querySelector(".orb-2");
+
+        const orb3 =
+            document.querySelector(".orb-3");
+
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                const x =
+                    (
+                        event.clientX /
+                        window.innerWidth -
+                        .5
+                    ) * 2;
+
+
+                const y =
+                    (
+                        event.clientY /
+                        window.innerHeight -
+                        .5
+                    ) * 2;
+
+
+                orb1.style.transform =
+                    `translate(
+                        ${x * 12}px,
+                        ${y * 12}px
+                    )`;
+
+
+                orb2.style.transform =
+                    `translate(
+                        ${x * -16}px,
+                        ${y * -16}px
+                    )`;
+
+
+                orb3.style.transform =
+                    `translate(
+                        ${x * 7}px,
+                        ${y * 7}px
+                    )`;
+
+            }
+        );
+
+
+        /* =========================================
            EASTER EGG
-           5x zNiclas_ klicken
-        ======================================== */
+           5x NAME CLICK
+        ========================================= */
 
         const logo =
             document.getElementById("logo");
 
         const heroName =
-            document.getElementById("hero-name");
+            document.getElementById(
+                "hero-name"
+            );
 
-        const voidMode =
-            document.getElementById("void-mode");
+        const egg =
+            document.getElementById(
+                "easter-egg"
+            );
 
 
-        let clickCount = 0;
+        let clicks = 0;
 
-        let clickTimer;
+        let clickTimeout;
 
 
         function secretClick() {
 
-            clickCount++;
+            clicks++;
 
-            clearTimeout(clickTimer);
-
-
-            clickTimer = setTimeout(() => {
-
-                clickCount = 0;
-
-            }, 1400);
+            clearTimeout(
+                clickTimeout
+            );
 
 
-            if (clickCount >= 5) {
+            clickTimeout =
+                setTimeout(
+                    () => {
 
-                clickCount = 0;
+                        clicks = 0;
 
-                activateVoidMode();
+                    },
+                    1400
+                );
+
+
+            if (clicks >= 5) {
+
+                clicks = 0;
+
+                openEgg();
 
             }
 
@@ -2379,41 +2903,15 @@
         );
 
 
+        /* =========================================
+           KEYBOARD SECRET
+           NICLAS
+        ========================================= */
 
-        /* ========================================
-           VOID MODE
-        ======================================== */
+        let secretCode = "";
 
-        function activateVoidMode() {
-
-            document.body.classList.add(
-                "glitch"
-            );
-
-
-            setTimeout(() => {
-
-                document.body.classList.remove(
-                    "glitch"
-                );
-
-
-                voidMode.classList.add(
-                    "active"
-                );
-
-            }, 350);
-
-        }
-
-
-        function closeVoidMode() {
-
-            voidMode.classList.remove(
-                "active"
-            );
-
-        }
+        const secret =
+            "niclas";
 
 
         document.addEventListener(
@@ -2421,13 +2919,36 @@
             (event) => {
 
                 if (
-                    event.key === "Escape" &&
-                    voidMode.classList.contains(
-                        "active"
-                    )
+                    event.key.length !== 1
+                ) {
+                    return;
+                }
+
+
+                secretCode +=
+                    event.key.toLowerCase();
+
+
+                if (
+                    secretCode.length >
+                    secret.length
                 ) {
 
-                    closeVoidMode();
+                    secretCode =
+                        secretCode.slice(
+                            -secret.length
+                        );
+
+                }
+
+
+                if (
+                    secretCode === secret
+                ) {
+
+                    secretCode = "";
+
+                    openEgg();
 
                 }
 
@@ -2435,20 +2956,71 @@
         );
 
 
+        /* =========================================
+           OPEN EASTER EGG
+        ========================================= */
 
-        /* ========================================
-           VOID CLICK OUTSIDE
-        ======================================== */
+        function openEgg() {
 
-        voidMode.addEventListener(
+            egg.classList.add(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        /* =========================================
+           CLOSE EASTER EGG
+        ========================================= */
+
+        function closeEgg() {
+
+            egg.classList.remove(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        document
+            .getElementById("egg-close")
+            .addEventListener(
+                "click",
+                closeEgg
+            );
+
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeEgg();
+
+                }
+
+            }
+        );
+
+
+        egg.addEventListener(
             "click",
             (event) => {
 
                 if (
-                    event.target === voidMode
+                    event.target === egg
                 ) {
 
-                    closeVoidMode();
+                    closeEgg();
 
                 }
 
@@ -2456,102 +3028,63 @@
         );
 
 
+        /* =========================================
+           EASTER EGG PARTICLES
+        ========================================= */
 
-        /* ========================================
-           BACKGROUND PARALLAX
-        ======================================== */
-
-        document.addEventListener(
-            "mousemove",
-            (event) => {
-
-                const x =
-                    (
-                        event.clientX /
-                        window.innerWidth -
-                        0.5
-                    ) * 2;
+        const particleContainer =
+            document.getElementById(
+                "egg-particles"
+            );
 
 
-                const y =
-                    (
-                        event.clientY /
-                        window.innerHeight -
-                        0.5
-                    ) * 2;
+        for (
+            let i = 0;
+            i < 55;
+            i++
+        ) {
+
+            const particle =
+                document.createElement("div");
 
 
-                const orbOne =
-                    document.querySelector(
-                        ".orb.one"
-                    );
+            particle.className =
+                "egg-particle";
 
 
-                const orbTwo =
-                    document.querySelector(
-                        ".orb.two"
-                    );
+            particle.style.left =
+                Math.random() * 100 + "%";
 
 
-                const orbThree =
-                    document.querySelector(
-                        ".orb.three"
-                    );
+            particle.style.setProperty(
+                "--duration",
+                (6 + Math.random() * 10) + "s"
+            );
 
 
-                orbOne.style.transform =
-                    `translate(
-                        ${x * 12}px,
-                        ${y * 12}px
-                    )`;
+            particle.style.setProperty(
+                "--opacity",
+                (0.15 + Math.random() * 0.7)
+            );
 
 
-                orbTwo.style.transform =
-                    `translate(
-                        ${x * -15}px,
-                        ${y * -15}px
-                    )`;
+            particle.style.setProperty(
+                "--drift",
+                ((Math.random() - .5) * 180)
+                + "px"
+            );
 
 
-                orbThree.style.transform =
-                    `translate(
-                        ${x * 7}px,
-                        ${y * 7}px
-                    )`;
-
-            }
-        );
+            particle.style.animationDelay =
+                (-Math.random() * 12)
+                + "s";
 
 
+            particleContainer.appendChild(
+                particle
+            );
 
-        /* ========================================
-           NAV SCROLL EFFECT
-        ======================================== */
-
-        const nav =
-            document.querySelector("nav");
-
-
-        window.addEventListener(
-            "scroll",
-            () => {
-
-                if (
-                    window.scrollY > 30
-                ) {
-
-                    nav.style.boxShadow =
-                        "0 15px 50px rgba(0,0,0,0.35)";
-
-                } else {
-
-                    nav.style.boxShadow =
-                        "0 10px 40px rgba(0,0,0,0.2)";
-
-                }
-
-            }
-        );
+        }
 
     </script>
 
